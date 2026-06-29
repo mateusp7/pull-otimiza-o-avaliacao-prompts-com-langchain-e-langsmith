@@ -13,6 +13,7 @@
 
 - Fazer uma tarefa que já foi concluida
 - Fazer mais de uma tarefa ao mesmo tempo se elas não tiverem correlação
+- Não mexa nos comentários dos arquivos
 
 ## Formato da documentação
 
@@ -22,7 +23,7 @@
 
 # Documentação das etpaas
 
-## Tarefa X
+## Nome da tarefa
 
 ### O que foi feito
 ### Aonde foi feito
@@ -31,7 +32,7 @@
 
 ---
 
-## Tarefa Y
+## Nome da tarefa
 
 ### O que foi feito
 ### Aonde foi feito
@@ -39,6 +40,8 @@
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
 ```
+
+- Observação: Não mencione nada relacionado a AGENTS.md e README.md
 
 ## Refefências para criação dos arquivos
 

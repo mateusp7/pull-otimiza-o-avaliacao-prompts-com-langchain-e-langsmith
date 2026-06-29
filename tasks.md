@@ -6,11 +6,11 @@
    1.5 [X] Informar a API key do provedor de LLM escolhido, OpenAI ou Gemini
 
 2. Implementar o pull do prompt inicial
-   2.1 [ ] Analisar o esqueleto existente em `src/pull_prompts.py`
-   2.2 [ ] Conectar ao LangSmith usando as credenciais configuradas
-   2.3 [ ] Fazer pull do prompt `leonanluppi/bug_to_user_story_v1`
-   2.4 [ ] Salvar o prompt localmente em `prompts/bug_to_user_story_v1.yml`
-   2.5 [ ] Executar `python src/pull_prompts.py` para validar o fluxo de pull
+   2.1 [X] Analisar o esqueleto existente em `src/pull_prompts.py`
+   2.2 [X] Conectar ao LangSmith usando as credenciais configuradas
+   2.3 [X] Fazer pull do prompt `leonanluppi/bug_to_user_story_v1`
+   2.4 [X] Salvar o prompt localmente em `prompts/bug_to_user_story_v1.yml`
+   2.5 [X] Executar `python src/pull_prompts.py` para validar o fluxo de pull
 
 3. Analisar o prompt original
    3.1 [ ] Ler o arquivo `prompts/bug_to_user_story_v1.yml`
