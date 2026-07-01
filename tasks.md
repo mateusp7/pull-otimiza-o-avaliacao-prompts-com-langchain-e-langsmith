@@ -13,21 +13,21 @@
    2.5 [X] Executar `python src/pull_prompts.py` para validar o fluxo de pull
 
 3. Analisar o prompt original
-   3.1 [ ] Ler o arquivo `prompts/bug_to_user_story_v1.yml`
-   3.2 [ ] Identificar problemas de clareza, precisao, formato e comportamento esperado
-   3.3 [ ] Mapear quais metricas podem ser impactadas pelos problemas encontrados
-   3.4 [ ] Definir os criterios que o prompt otimizado deve atender
+   3.1 [X] Ler o arquivo `prompts/bug_to_user_story_v1.yml`
+   3.2 [X] Identificar problemas de clareza, precisao, formato e comportamento esperado
+   3.3 [X] Mapear quais metricas podem ser impactadas pelos problemas encontrados
+   3.4 [X] Definir os criterios que o prompt otimizado deve atender
 
 4. Criar o prompt otimizado
-   4.1 [ ] Criar o arquivo `prompts/bug_to_user_story_v2.yml`
-   4.2 [ ] Definir corretamente mensagens de System Prompt e User Prompt
-   4.3 [ ] Incluir uma persona clara para o modelo
-   4.4 [ ] Escrever instrucoes especificas para transformar bugs em user stories
-   4.5 [ ] Definir regras explicitas de comportamento e formato de resposta
-   4.6 [ ] Aplicar Few-shot Learning com exemplos claros de entrada e saida
-   4.7 [ ] Aplicar pelo menos uma tecnica adicional, como Chain of Thought, Skeleton of Thought ou Role Prompting
-   4.8 [ ] Incluir tratamento para edge cases
-   4.9 [ ] Registrar metadados no YAML com as tecnicas utilizadas
+   4.1 [X] Criar o arquivo `prompts/bug_to_user_story_v2.yml`
+   4.2 [X] Definir corretamente mensagens de System Prompt e User Prompt
+   4.3 [X] Incluir uma persona clara para o modelo
+   4.4 [X] Escrever instrucoes especificas para transformar bugs em user stories
+   4.5 [X] Definir regras explicitas de comportamento e formato de resposta
+   4.6 [X] Aplicar Few-shot Learning com exemplos claros de entrada e saida
+   4.7 [X] Aplicar pelo menos uma tecnica adicional, como Chain of Thought, Skeleton of Thought, Role Prompting, ReAct ou Tree of Thought
+   4.8 [X] Incluir tratamento para edge cases
+   4.9 [X] Registrar metadados no YAML com as tecnicas utilizadas
 
 5. Implementar os testes de validacao
    5.1 [ ] Analisar o esqueleto existente em `tests/test_prompts.py`
@@ -41,13 +41,13 @@
    5.9 [ ] Corrigir o prompt ou os testes caso alguma validacao falhe
 
 6. Implementar o push do prompt otimizado
-   6.1 [ ] Analisar o esqueleto existente em `src/push_prompts.py`
-   6.2 [ ] Ler o prompt otimizado de `prompts/bug_to_user_story_v2.yml`
-   6.3 [ ] Fazer push para o LangSmith com o nome versionado `{seu_username}/bug_to_user_story_v2`
-   6.4 [ ] Enviar metadados como tags, descricao e tecnicas utilizadas
-   6.5 [ ] Executar `python src/push_prompts.py`
-   6.6 [ ] Verificar no dashboard do LangSmith se o prompt foi publicado
-   6.7 [ ] Tornar o prompt publico
+   6.1 [X] Analisar o esqueleto existente em `src/push_prompts.py`
+   6.2 [X] Ler o prompt otimizado de `prompts/bug_to_user_story_v2.yml`
+   6.3 [X] Fazer push para o LangSmith com o nome versionado `{seu_username}/bug_to_user_story_v2`
+   6.4 [X] Enviar metadados como tags, descricao e tecnicas utilizadas
+   6.5 [X] Executar `python src/push_prompts.py`
+   6.6 [X] Verificar no dashboard do LangSmith se o prompt foi publicado
+   6.7 [X] Tornar o prompt publico
 
 7. Executar a avaliacao automatica
    7.1 [ ] Executar `python src/evaluate.py`
@@ -56,13 +56,13 @@
    7.4 [ ] Confirmar se a media das cinco metricas tambem esta maior ou igual a 0.8
 
 8. Iterar ate atingir os criterios de aprovacao
-   8.1 [ ] Analisar as metricas abaixo de 0.8
-   8.2 [ ] Consultar traces do LangSmith para entender falhas de resposta
-   8.3 [ ] Ajustar o prompt em `prompts/bug_to_user_story_v2.yml`
+   8.1 [X] Analisar as metricas abaixo de 0.8
+   8.2 [X] Consultar traces do LangSmith para entender falhas de resposta
+   8.3 [X] Ajustar o prompt em `prompts/bug_to_user_story_v2.yml`
    8.4 [ ] Fazer novo push do prompt otimizado
    8.5 [ ] Executar nova avaliacao
    8.6 [ ] Repetir o ciclo ate todas as metricas atingirem pelo menos 0.8
-   8.7 [ ] Registrar as iteracoes e os aprendizados do processo
+   8.7 [X] Registrar as iteracoes e os aprendizados do processo
 
 9. Documentar o processo no README
    9.1 [ ] Criar ou atualizar a secao "Tecnicas Aplicadas (Fase 2)"
@@ -83,3 +83,4 @@
     10.5 [ ] Confirmar que as execucoes do prompt v2 mostram notas maiores ou iguais a 0.8
     10.6 [ ] Confirmar que ha tracing detalhado de pelo menos 3 exemplos
     10.7 [ ] Publicar ou manter o fork do repositorio como publico no GitHub
+
