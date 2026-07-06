@@ -30,15 +30,15 @@
    4.9 [X] Registrar metadados no YAML com as tecnicas utilizadas
 
 5. Implementar os testes de validacao
-   5.1 [ ] Analisar o esqueleto existente em `tests/test_prompts.py`
-   5.2 [ ] Implementar `test_prompt_has_system_prompt`
-   5.3 [ ] Implementar `test_prompt_has_role_definition`
-   5.4 [ ] Implementar `test_prompt_mentions_format`
-   5.5 [ ] Implementar `test_prompt_has_few_shot_examples`
-   5.6 [ ] Implementar `test_prompt_no_todos`
-   5.7 [ ] Implementar `test_minimum_techniques`
-   5.8 [ ] Executar `pytest tests/test_prompts.py`
-   5.9 [ ] Corrigir o prompt ou os testes caso alguma validacao falhe
+   5.1 [X] Analisar o esqueleto existente em `tests/test_prompts.py`
+   5.2 [X] Implementar `test_prompt_has_system_prompt`
+   5.3 [X] Implementar `test_prompt_has_role_definition`
+   5.4 [X] Implementar `test_prompt_mentions_format`
+   5.5 [X] Implementar `test_prompt_has_few_shot_examples`
+   5.6 [X] Implementar `test_prompt_no_todos`
+   5.7 [X] Implementar `test_minimum_techniques`
+   5.8 [X] Executar `pytest tests/test_prompts.py`
+   5.9 [X] Corrigir o prompt ou os testes caso alguma validacao falhe
 
 6. Implementar o push do prompt otimizado
    6.1 [X] Analisar o esqueleto existente em `src/push_prompts.py`
@@ -50,18 +50,18 @@
    6.7 [X] Tornar o prompt publico
 
 7. Executar a avaliacao automatica
-   7.1 [ ] Executar `python src/evaluate.py`
-   7.2 [ ] Verificar as metricas Helpfulness, Correctness, F1-Score, Clarity e Precision
-   7.3 [ ] Confirmar se todas as metricas estao com pontuacao maior ou igual a 0.8
-   7.4 [ ] Confirmar se a media das cinco metricas tambem esta maior ou igual a 0.8
+   7.1 [x] Executar `python src/evaluate.py`
+   7.2 [x] Verificar as metricas Helpfulness, Correctness, F1-Score, Clarity e Precision
+   7.3 [x] Confirmar se todas as metricas estao com pontuacao maior ou igual a 0.8
+   7.4 [x] Confirmar se a media das cinco metricas tambem esta maior ou igual a 0.8
 
 8. Iterar ate atingir os criterios de aprovacao
    8.1 [X] Analisar as metricas abaixo de 0.8
    8.2 [X] Consultar traces do LangSmith para entender falhas de resposta
    8.3 [X] Ajustar o prompt em `prompts/bug_to_user_story_v2.yml`
-   8.4 [ ] Fazer novo push do prompt otimizado
-   8.5 [ ] Executar nova avaliacao
-   8.6 [ ] Repetir o ciclo ate todas as metricas atingirem pelo menos 0.8
+   8.4 [x] Fazer novo push do prompt otimizado
+   8.5 [x] Executar nova avaliacao
+   8.6 [x] Repetir o ciclo ate todas as metricas atingirem pelo menos 0.8
    8.7 [X] Registrar as iteracoes e os aprendizados do processo
 
 9. Documentar o processo no README
@@ -76,11 +76,10 @@
    9.9 [ ] Documentar pre-requisitos, dependencias e comandos de execucao
 
 10. Preparar as evidencias e a entrega final
-    10.1 [ ] Confirmar que o repositorio contem todo o codigo-fonte implementado
-    10.2 [ ] Confirmar que `prompts/bug_to_user_story_v2.yml` esta completo e funcional
-    10.3 [ ] Confirmar que `README.md` esta atualizado com tecnicas, resultados e execucao
+    10.1 [x] Confirmar que o repositorio contem todo o codigo-fonte implementado
+    10.2 [x] Confirmar que `prompts/bug_to_user_story_v2.yml` esta completo e funcional
+    10.3 [x] Confirmar que `README.md` esta atualizado com tecnicas, resultados e execucao
     10.4 [ ] Confirmar que o dashboard ou screenshots do LangSmith mostram o dataset com 15 exemplos
     10.5 [ ] Confirmar que as execucoes do prompt v2 mostram notas maiores ou iguais a 0.8
     10.6 [ ] Confirmar que ha tracing detalhado de pelo menos 3 exemplos
     10.7 [ ] Publicar ou manter o fork do repositorio como publico no GitHub
-

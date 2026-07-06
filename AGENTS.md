@@ -8,11 +8,11 @@
 
 ## O que fazer
 
-- Você deve seguir o passo a passo indicado no arquivo `README.md`, que está na raiz do projeto.
-- Cada tarefa realizada, deverá ser documentada em um novo arquivo separado, por enquanto, crie no arquivo `step-by-step.md` na raiz do projeto.
+- Você deve seguir o passo a passo indicado no arquivo `SPECIFICATION.md`, que está na raiz do projeto.
+- Cada tarefa realizada, deverá ser documentada em um novo arquivo separado, por enquanto, crie no arquivo `README.md` na raiz do projeto.
 - Verifique se cada tarefa realizada precisa de um teste para ela, se sim, faça a criação do teste e rode, para verificar se passou corretamente.
 - Após finalizar uma tarefa, se houver necessidade, marque como concluida no arquivo `tasks.md`
-- MANTENHA a escrita com acentos e em Português BR para o arquivo de `bug_to_user_story_v2.yml` e `step-by-step.md`
+- MANTENHA a escrita com acentos e em Português BR para o arquivo de `bug_to_user_story_v2.yml` e `README.md`
 
 ## O que não fazer
 
@@ -23,7 +23,7 @@
 
 ## Formato da documentação
 
-- Cada tarefa deve ser documentada no arquivo `step-by-step.md`, com a seguinte formatação:
+- Cada tarefa deve ser documentada no arquivo `README.md`, com a seguinte formatação:
 
 ```markdown
 
@@ -51,4 +51,4 @@
 
 ## Refefências para criação dos arquivos
 
-- No arquivo `README.md`, possui uma seção chamada **Repositórios úteis**, para utilizar como referência para criação do código
+- No arquivo `SPECIFICATION.md`, possui uma seção chamada **Repositórios úteis**, para utilizar como referência para criação do código
