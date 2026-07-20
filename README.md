@@ -301,8 +301,6 @@ A implementação foi feita no script `src/pull_prompts.py`, usando `langchain.h
 
 - `src/pull_prompts.py`
 - `prompts/bug_to_user_story_v1.yml`
-- `tasks.md`
-- `step-by-step.md`
 
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
@@ -314,32 +312,6 @@ A implementação foi feita no script `src/pull_prompts.py`, usando `langchain.h
 6. Extração de `system_prompt`, `user_prompt`, `input_variables` e mensagens do prompt retornado.
 7. Salvamento do YAML em `prompts/bug_to_user_story_v1.yml`.
 8. Execução de `.\.venv\Scripts\python.exe -B src\pull_prompts.py` para validar o fluxo completo.
-
----
-
-## Analisar o prompt original
-
-### O que foi feito
-
-Foi analisado o prompt original em `prompts/bug_to_user_story_v1.yml` para entender por que ele tendia a gerar respostas fracas nas métricas de avaliação. A análise identificou que o prompt definia apenas uma instrução genérica para transformar relatos de bugs em user stories, sem especificar formato obrigatório, critérios de aceitação, exemplos, tratamento de bugs simples, médios e complexos, preservação de contexto técnico ou regras contra informações inventadas.
-
-### Aonde foi feito
-
-A análise foi feita sobre o conteúdo de `prompts/bug_to_user_story_v1.yml`, comparando suas instruções com os critérios das métricas em `src/metrics.py` e com o padrão esperado pelas referências do dataset em `datasets/bug_to_user_story.jsonl`.
-
-### Arquivo(s) modificado(s)
-
-- `tasks.md`
-- `step-by-step.md`
-
-### Fluxo lógico para alcançar o sucesso da tarefa
-
-1. Ler o YAML do prompt original e identificar sua estrutura.
-2. Verificar que o prompt original pedia apenas uma user story, sem exigir o formato "Como um..., eu quero..., para que...".
-3. Identificar ausência de seções obrigatórias para respostas de maior qualidade.
-4. Mapear impactos em F1-Score, Clarity, Precision, Helpfulness e Correctness.
-5. Definir critérios para o prompt otimizado: persona explícita, Markdown previsível, user story padrão, critérios Given-When-Then, preservação técnica, tratamento proporcional e exemplos few-shot.
-6. Marcar os itens da tarefa 3 como concluídos em `tasks.md`.
 
 ---
 
@@ -358,8 +330,6 @@ A criação foi feita no arquivo `prompts/bug_to_user_story_v2.yml`, usando como
 ### Arquivo(s) modificado(s)
 
 - `prompts/bug_to_user_story_v2.yml`
-- `tasks.md`
-- `step-by-step.md`
 
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
@@ -387,8 +357,6 @@ A implementação foi feita em `src/push_prompts.py`, usando `langchain.hub.push
 ### Arquivo(s) modificado(s)
 
 - `src/push_prompts.py`
-- `tasks.md`
-- `step-by-step.md`
 
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
@@ -426,8 +394,6 @@ As mudanças foram feitas principalmente em `prompts/bug_to_user_story_v2.yml`, 
 
 - `prompts/bug_to_user_story_v2.yml`
 - `tests/test_prompts.py`
-- `tasks.md`
-- `step-by-step.md`
 
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
@@ -454,8 +420,6 @@ A implementação foi feita no arquivo `tests/test_prompts.py`, usando `pytest`,
 ### Arquivo(s) modificado(s)
 
 - `tests/test_prompts.py`
-- `tasks.md`
-- `step-by-step.md`
 
 ### Fluxo lógico para alcançar o sucesso da tarefa
 
