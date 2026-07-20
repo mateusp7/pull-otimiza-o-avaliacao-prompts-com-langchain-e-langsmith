@@ -48,8 +48,3 @@ ENV/
 screenshots/
 results/
 .claude/
-
-# Agent
-
-AGENTS.md
-tasks.md
