@@ -65,9 +65,9 @@
    8.7 [X] Registrar as iteracoes e os aprendizados do processo
 
 9. Documentar o processo no README
-   9.1 [ ] Criar ou atualizar a secao "Tecnicas Aplicadas (Fase 2)"
-   9.2 [ ] Descrever as tecnicas escolhidas e suas justificativas
-   9.3 [ ] Incluir exemplos praticos de aplicacao das tecnicas
+   9.1 [X] Criar ou atualizar a secao "Tecnicas Aplicadas (Fase 2)"
+   9.2 [X] Descrever as tecnicas escolhidas e suas justificativas
+   9.3 [X] Incluir exemplos praticos de aplicacao das tecnicas
    9.4 [ ] Criar ou atualizar a secao "Resultados Finais"
    9.5 [ ] Adicionar link publico do dashboard do LangSmith
    9.6 [ ] Adicionar screenshots ou evidencias das avaliacoes

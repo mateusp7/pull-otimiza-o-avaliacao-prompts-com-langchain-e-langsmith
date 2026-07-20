@@ -89,6 +89,27 @@ class TestPrompts:
         assert "entrada:" in text
         assert "saida:" in text or "saída:" in text
 
+    def test_prompt_examples_cover_medium_reference_scenarios(self, prompt_data: Dict[str, Any]) -> None:
+        """Verifica se os exemplos médios cobrem os cenários de referência."""
+        text = prompt_text(prompt_data).lower()
+
+        required_terms = [
+            "webhook",
+            "owasp",
+            "modal",
+            "sql",
+            "estoque",
+            "concorrência",
+            "firefox",
+            "chrome",
+            "edge",
+        ]
+
+        assert all(term in text for term in required_terms)
+        assert "como o sistema" in text
+        assert "como um usuário" in text
+        assert text.count("bug médio") >= 6
+
     def test_prompt_no_todos(self, prompt_data: Dict[str, Any]) -> None:
         """Garante que você não esqueceu nenhum `[TODO]` no texto."""
         all_text = "\n".join(flatten_values(prompt_data)).lower()

@@ -52,3 +52,7 @@
 ## Refefências para criação dos arquivos
 
 - No arquivo `SPECIFICATION.md`, possui uma seção chamada **Repositórios úteis**, para utilizar como referência para criação do código
+
+## Regras
+
+- Quando for fazer alguma aplicação de código, use o Powershell e não o sandbox do windows, para evitar problema

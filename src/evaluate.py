@@ -1,4 +1,4 @@
-"""
+﻿"""
 Script COMPLETO para avaliar prompts otimizados.
 
 Este script:
@@ -20,10 +20,14 @@ Configure o provider no arquivo .env através da variável LLM_PROVIDER.
 import os
 import sys
 import json
+import io
+import time
+from contextlib import redirect_stdout, redirect_stderr
 from typing import List, Dict, Any
 from pathlib import Path
 from dotenv import load_dotenv
 from langsmith import Client
+from langsmith.evaluation import evaluate as langsmith_evaluate
 from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
 from utils import check_env_vars, format_score, print_section_header, get_llm as get_configured_llm
@@ -178,6 +182,86 @@ def evaluate_prompt_on_example(
         }
 
 
+def make_langsmith_target(prompt_template: ChatPromptTemplate, llm: Any):
+    chain = prompt_template | llm
+
+    def target(inputs: Dict[str, Any]) -> Dict[str, str]:
+        try:
+            response = chain.invoke(inputs)
+            return {"answer": response.content}
+        except Exception:
+            return {"answer": ""}
+
+    return target
+
+
+def langsmith_metrics_evaluator(run: Any, example: Any) -> Dict[str, Any]:
+    inputs = example.inputs if hasattr(example, 'inputs') else {}
+    outputs = example.outputs if hasattr(example, 'outputs') else {}
+    answer = run.outputs.get("answer", "") if run.outputs else ""
+    reference = outputs.get("reference", "") if isinstance(outputs, dict) else ""
+
+    if isinstance(inputs, dict):
+        question = inputs.get("question", inputs.get("bug_report", inputs.get("pr_title", "N/A")))
+    else:
+        question = "N/A"
+
+    f1 = evaluate_f1_score(question, answer, reference)
+    clarity = evaluate_clarity(question, answer, reference)
+    precision = evaluate_precision(question, answer, reference)
+
+    helpfulness = (clarity["score"] + precision["score"]) / 2
+    correctness = (f1["score"] + precision["score"]) / 2
+
+    return {
+        "results": [
+            {
+                "key": "f1_score",
+                "score": f1["score"],
+                "comment": f1.get("reasoning", "")
+            },
+            {
+                "key": "clarity",
+                "score": clarity["score"],
+                "comment": clarity.get("reasoning", "")
+            },
+            {
+                "key": "precision",
+                "score": precision["score"],
+                "comment": precision.get("reasoning", "")
+            },
+            {
+                "key": "helpfulness",
+                "score": round(helpfulness, 4),
+                "comment": "Derivada: media de clarity e precision"
+            },
+            {
+                "key": "correctness",
+                "score": round(correctness, 4),
+                "comment": "Derivada: media de f1_score e precision"
+            }
+        ]
+    }
+
+
+def extract_scores_from_evaluation_result(result: Any) -> Dict[str, float]:
+    evaluation_results = result.get("evaluation_results", {}).get("results", [])
+    scores = {}
+
+    for evaluation_result in evaluation_results:
+        key = getattr(evaluation_result, "key", None)
+        score = getattr(evaluation_result, "score", None)
+
+        if isinstance(evaluation_result, dict):
+            key = evaluation_result.get("key", key)
+            score = evaluation_result.get("score", score)
+
+        if key and score is not None:
+            scores[key] = float(score)
+
+    return scores
+
+
 def evaluate_prompt(
     prompt_name: str,
     dataset_name: str,
@@ -196,22 +280,40 @@ def evaluate_prompt(
         f1_scores = []
         clarity_scores = []
         precision_scores = []
+        target = make_langsmith_target(prompt_template, llm)
+        experiment_prefix = f"{prompt_name.replace('/', '-')}-{int(time.time())}"
+
+        output_buffer = io.StringIO()
+        with redirect_stdout(output_buffer), redirect_stderr(output_buffer):
+            experiment_results = langsmith_evaluate(
+                target,
+                data=dataset_name,
+                evaluators=[langsmith_metrics_evaluator],
+                experiment_prefix=experiment_prefix,
+                metadata={
+                    "prompt": prompt_name,
+                    "dataset": dataset_name
+                },
+                max_concurrency=1,
+                client=client,
+                upload_results=True
+            )
 
         print("   Avaliando exemplos...")
 
-        for i, example in enumerate(examples, 1):
-            result = evaluate_prompt_on_example(prompt_template, example, llm)
+        for i, result in enumerate(experiment_results, 1):
+            scores = extract_scores_from_evaluation_result(result)
 
-            if result["answer"]:
-                f1 = evaluate_f1_score(result["question"], result["answer"], result["reference"])
-                clarity = evaluate_clarity(result["question"], result["answer"], result["reference"])
-                precision = evaluate_precision(result["question"], result["answer"], result["reference"])
+            if scores:
+                f1 = scores.get("f1_score", 0.0)
+                clarity = scores.get("clarity", 0.0)
+                precision = scores.get("precision", 0.0)
 
-                f1_scores.append(f1["score"])
-                clarity_scores.append(clarity["score"])
-                precision_scores.append(precision["score"])
+                f1_scores.append(f1)
+                clarity_scores.append(clarity)
+                precision_scores.append(precision)
 
-                print(f"      [{i}/{len(examples)}] F1:{f1['score']:.2f} Clarity:{clarity['score']:.2f} Precision:{precision['score']:.2f}")
+                print(f"      [{i}/{len(examples)}] F1:{f1:.2f} Clarity:{clarity:.2f} Precision:{precision:.2f}")
 
         avg_f1 = sum(f1_scores) / len(f1_scores) if f1_scores else 0.0
         avg_clarity = sum(clarity_scores) / len(clarity_scores) if clarity_scores else 0.0
@@ -296,7 +398,8 @@ def main():
 
     client = Client()
     project_name = os.getenv("LANGSMITH_PROJECT", "prompt-optimization-challenge-resolved")
-
+    dataset_name = os.getenv("LANGSMITH_DATASET_NAME", "").strip() or f"{project_name}"
+    
     jsonl_path = "datasets/bug_to_user_story.jsonl"
 
     if not Path(jsonl_path).exists():
@@ -304,7 +407,6 @@ def main():
         print("\nCertifique-se de que o arquivo existe antes de continuar.")
         return 1
 
-    dataset_name = f"{project_name}-eval"
     create_evaluation_dataset(client, dataset_name, jsonl_path)
 
     print("\n" + "=" * 70)
@@ -321,8 +423,9 @@ def main():
         return 1
 
     prompts_to_evaluate = [
-        f"{username}/bug_to_user_story_v2",
-    ]
+    "leonanluppi/bug_to_user_story_v1",
+    f"{username}/bug_to_user_story_v2",
+]
 
     all_passed = True
     evaluated_count = 0
